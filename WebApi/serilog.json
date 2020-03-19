@@ -1,0 +1,42 @@
+{
+  "Serilog": {
+
+    "MinimumLevel": {
+      "Default": "Verbose",
+      "Override": {
+        "Microsoft": "Information"
+      }
+    },
+    "Using": [ "com.github.akovac35.Logging.Serilog.AspNetCore" ],
+    "Enrich": [
+      "WithThreadId",
+      "WithCorrelationId"
+    ],
+	"Destructure": [
+      { "Name": "ToMaximumDepth", "Args": { "maximumDestructuringDepth": 5 } },
+      { "Name": "ToMaximumStringLength", "Args": { "maximumStringLength": 1000 } },
+      { "Name": "ToMaximumCollectionCount", "Args": { "maximumCollectionCount": 20 } }
+    ],
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] {Level:u3} {ThreadId} {CorrelationId} <{SourceContext}:{CallerMemberName}:{CallerLineNumber}> {Message}{NewLine}{Exception}"
+        }
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "Logs//serilog.txt",
+          "rollingInterval": "Day",
+          "outputTemplate": "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] {Level:u3} {ThreadId} {CorrelationId} <{SourceContext}:{CallerMemberName}:{CallerLineNumber}> {Message}{NewLine}{Exception}",
+          "fileSizeLimitBytes": 1073741824,
+          "rollOnFileSizeLimit": true,
+          "retainedFileCountLimit": 31,
+          "shared": true,
+          "restrictedToMinimumLevel": "Verbose"
+        }
+      }
+    ]
+  }
+}

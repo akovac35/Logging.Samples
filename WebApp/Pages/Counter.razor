@@ -1,0 +1,37 @@
+﻿@page "/counter"
+
+@using Microsoft.Extensions.Logging
+@using Microsoft.AspNetCore.Http
+@using global::com.github.akovac35.Logging.AspNetCore
+@using global::com.github.akovac35.Logging
+@using global::Shared.Mocks
+
+@using static global::com.github.akovac35.Logging.LoggerHelper<WebApp.Pages.Counter>
+
+@inject IHttpContextAccessor hc
+
+<h1>Counter</h1>
+
+<p>Correlation id:  @hc.GetCorrelationId()</p>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private async Task IncrementCount()
+    {
+        Here(l => l.Entering());
+
+        currentCount++;
+        Here(l => l.LogInformation("currentCount: {currentCount}", currentCount));
+
+        // Business logic call sample
+        var blMock = new BusinessLogicMock<object>();
+        await blMock.FirstLevelAsync(500);
+
+        Here(l => l.Exiting());
+    }
+}

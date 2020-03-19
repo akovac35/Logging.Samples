@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="NLog.config" />
+    <None Remove="NLog.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="serilog.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="com.github.akovac35.Logging.NLog" Version="1.0.3" />
+    <PackageReference Include="com.github.akovac35.Logging.Serilog" Version="1.0.3" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+</Project>

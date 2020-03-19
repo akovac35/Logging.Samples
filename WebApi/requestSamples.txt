@@ -1,0 +1,1 @@
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "x-request-id: 12345678" -k https://localhost:5001/weatherforecast

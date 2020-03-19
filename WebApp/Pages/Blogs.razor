@@ -1,0 +1,12 @@
+﻿@inherits BlogsBase
+@page "/blogs"
+
+@using global::com.github.akovac35.Logging.AspNetCore
+
+<h1>Blogs</h1>
+
+<p>Correlation id:  @httpContextAccessor.GetCorrelationId()</p>
+
+<p>Current count: @blogService.Count</p>
+
+<button class="btn btn-primary" @onclick="AddNewRandomBlog">Add new random blog</button>
