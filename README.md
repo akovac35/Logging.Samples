@@ -1,4 +1,4 @@
-# LoggingSamples
+# Logging.Samples
 A small project to explore logging functionality in .NET Core.
 
 ![this](Resources/.NET_Core_Logo_small.png)

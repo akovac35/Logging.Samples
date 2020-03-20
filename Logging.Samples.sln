@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{759E142D-E7F0-4201-8B8E-EE7A0AACEDD7}"
 	ProjectSection(SolutionItems) = preProject
-		Logging.header = Logging.header
+		Logging.Samples.header = Logging.Samples.header
 	EndProjectSection
 EndProject
 Global
