@@ -4,6 +4,7 @@ using com.github.akovac35.Logging;
 using com.github.akovac35.Logging.NLog;
 using com.github.akovac35.Logging.Serilog;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
@@ -20,11 +21,11 @@ namespace WebApp
         {
             SamplesLoggingHelper.LoggerInit(args, configActionNLog: () =>
             {
-                NLogHelper.CreateLogger();
+                NLogHelper.CreateLogger("NLog.config");
                 LoggerFactoryProvider.LoggerFactory = NLogHelper.CreateLoggerFactory();
             }, configActionSerilog: () =>
             {
-                SerilogHelper.CreateLogger();
+                SerilogHelper.CreateLogger(configure => configure.AddJsonFile("serilog.json", optional: false, reloadOnChange: true));
                 LoggerFactoryProvider.LoggerFactory = SerilogHelper.CreateLoggerFactory();
             });
 
