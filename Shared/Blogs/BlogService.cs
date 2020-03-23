@@ -13,14 +13,7 @@ namespace Shared.Blogs
     {
         public BlogService(BlogContext context, ILoggerFactory loggerFactory = null)
         {
-            if (loggerFactory == null)
-            {
-                _logger = LoggerFactoryProvider.LoggerFactory.CreateLogger<BlogService>();
-            }
-            else
-            {
-                _logger = loggerFactory.CreateLogger<BlogService>();
-            }
+            _logger = (loggerFactory ?? LoggerFactoryProvider.LoggerFactory).CreateLogger<BlogService>();
 
             _logger.Here(l => l.EnteringSimpleFormat(context));
 

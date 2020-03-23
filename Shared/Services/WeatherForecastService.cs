@@ -13,14 +13,7 @@ namespace Shared.Services
     {
         public WeatherForecastService(ICorrelationProvider correlationProvider, ILoggerFactory loggerFactory = null)
         {
-            if (loggerFactory == null)
-            {
-                _logger = LoggerFactoryProvider.LoggerFactory.CreateLogger<WeatherForecastService>();
-            }
-            else
-            {
-                _logger = loggerFactory.CreateLogger<WeatherForecastService>();
-            }
+            _logger = (loggerFactory ?? LoggerFactoryProvider.LoggerFactory).CreateLogger<WeatherForecastService>();
 
             _logger.Here(l => l.Entering(correlationProvider));
 

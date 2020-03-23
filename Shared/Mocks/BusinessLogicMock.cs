@@ -11,14 +11,7 @@ namespace Shared.Mocks
     {
         public BusinessLogicMock(ILoggerFactory loggerFactory = null)
         {
-            if (loggerFactory == null)
-            {
-                _logger = LoggerFactoryProvider.LoggerFactory.CreateLogger<BusinessLogicMock<T>>();
-            }
-            else
-            {
-                _logger = loggerFactory.CreateLogger<BusinessLogicMock<T>>();
-            }
+            _logger = (loggerFactory ?? LoggerFactoryProvider.LoggerFactory).CreateLogger<BusinessLogicMock<T>>();
 
             _logger.Here(l => l.Entering());
 
