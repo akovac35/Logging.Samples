@@ -17,7 +17,7 @@ All samples are configured to demonstrate the configuration of common logging re
 * Logging to console,
 * logging to files using daily rotation with configured maximum number of historic files and maximum file size,
 * logger configuration update during application execution,
-* log entry correlation for web api requests and Blazor Server circuit,
+* log entry correlation for web API requests and Blazor Server circuit,
 * Entity Framework Core logging,
 * compile-time logger invocation context information,
 * serialization of complex log entry parameters using only general template patterns common to every sampled logger framework,
@@ -62,6 +62,10 @@ SamplesLoggingHelper.LoggerInit(args, configActionNLog: () =>
 });
 ```
 
-Each logger framework reads configuration from files and the above example demonstrates how to specify them. Regarding logger configuration update during application execution, this is either taken care of by the logger framework implementation or by the [Logging](https://github.com/akovac35/Logging) library - as long as the demonstrated patterns are adhered to. Be advised that executing the samples with the ```dotnet run``` command causes some frameworks to monitor the root configuration files (not the ones in the /bin folder). Execute the samples from the ```dotnet publish``` contents to work around this problem.
+Each logger framework reads configuration from files and the above example demonstrates how to specify them.
+
+Regarding logger configuration update during application execution, this is either taken care of by the logger framework implementation or by the [Logging](https://github.com/akovac35/Logging) library - as long as the demonstrated patterns are adhered to.
 
 Log filtering for context and log level is demonstrated in logger framework configuration files.
+
+Be advised that executing the samples with the ```dotnet run``` command causes some frameworks to monitor the root configuration files (not the ones in the /bin folder). Execute the samples from the ```dotnet publish``` contents to work around this problem.
