@@ -70,5 +70,8 @@ Log filtering for context and log level is demonstrated in logger framework conf
 
 Be advised that executing the samples with the ```dotnet run``` command causes some frameworks to monitor the root configuration files (not the ones in the /bin folder). Execute the samples from the ```dotnet publish``` contents to work around this problem.
 
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
 ## License
 [Apache-2.0](LICENSE)
