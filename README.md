@@ -69,3 +69,6 @@ Regarding logger configuration update during application execution, this is eith
 Log filtering for context and log level is demonstrated in logger framework configuration files.
 
 Be advised that executing the samples with the ```dotnet run``` command causes some frameworks to monitor the root configuration files (not the ones in the /bin folder). Execute the samples from the ```dotnet publish``` contents to work around this problem.
+
+## License
+[Apache-2.0](LICENSE)
