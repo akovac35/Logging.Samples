@@ -6,9 +6,8 @@
 @using global::com.github.akovac35.Logging
 @using global::Shared.Services
 
-@using static global::com.github.akovac35.Logging.LoggerHelper<WebApp.Pages.FetchData>
-
 @inject IHttpContextAccessor hc
+@inject ILogger<WebApp.Pages.FetchData> logger
 @inject WeatherForecastService ForecastService
 
 <h1>Weather forecast</h1>
@@ -51,11 +50,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        Here(l => l.Entering());
+        logger.Here(l => l.Entering());
 
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-        Here(l => l.LogInformation("forecasts: {@forecasts}", forecasts));
+        logger.Here(l => l.LogInformation("forecasts: {@forecasts}", forecasts));
 
-        Here(l => l.Exiting());
+        logger.Here(l => l.Exiting());
     }
 }
