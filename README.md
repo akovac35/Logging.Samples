@@ -1,7 +1,7 @@
 # Logging.Samples
 This project contains samples for .NET Core and ASP.NET Core logging using various logger frameworks.
 
-Also demonstrated is functionality provided in the [Logging](https://github.com/akovac35/Logging) library. **You should get familiar with it first to understand the samples**.
+Also demonstrated is functionality provided in the [Logging](https://github.com/akovac35/Logging) library. **You should get familiar with it first to understand the samples**. The library implementation itself is also a good example on how to use various logger frameworks.
 
 ![this](Resources/.NET_Core_Logo_small.png)
 
@@ -69,6 +69,9 @@ Regarding logger configuration update during application execution, this is eith
 Log filtering for context and log level is demonstrated in logger framework configuration files.
 
 Be advised that executing the samples with the ```dotnet run``` command causes some frameworks to monitor the root configuration files (not the ones in the /bin folder). Execute the samples from the ```dotnet publish``` contents to work around this problem.
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 [Apache-2.0](LICENSE)
