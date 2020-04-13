@@ -1,4 +1,8 @@
-// Author: Aleksander Kovač
+// License:
+// Apache License Version 2.0, January 2004
+
+// Authors:
+//   Aleksander Kovač
 
 using com.github.akovac35.Logging;
 using com.github.akovac35.Logging.Correlation;
@@ -36,7 +40,7 @@ namespace Shared.Services
         {
             _logger.Here(l => l.Entering(startDate));
 
-            _logger.Here(l => l.LogInformation("CorrelationId is useful for correlating log contents with service or web page requests: {@correlationId}", _correlationProvider.GetCorrelationId()));
+            _logger.Here(l => l.LogInformation("CorrelationId is useful for correlating log contents with service or web page requests: {@0}", _correlationProvider.GetCorrelationId()));
 
             var rng = new Random();
             var tmp = Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast

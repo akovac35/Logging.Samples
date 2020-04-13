@@ -53,7 +53,8 @@ else
         logger.Here(l => l.Entering());
 
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-        logger.Here(l => l.LogInformation("forecasts: {@forecasts}", forecasts));
+		// Wrapping with object[] is required to log all array elements and not just the first one
+        logger.Here(l => l.LogInformation("forecasts: {@0}", new object[] {forecasts}));
 
         logger.Here(l => l.Exiting());
     }

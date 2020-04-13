@@ -1,4 +1,8 @@
-﻿// Author: Aleksander Kovač
+﻿// License:
+// Apache License Version 2.0, January 2004
+
+// Authors:
+//   Aleksander Kovač
 
 using com.github.akovac35.Logging;
 using com.github.akovac35.Logging.AspNetCore;
@@ -46,7 +50,7 @@ namespace WebApi.Controllers
             _logger.Here(l => l.Entering());
 
             var forecasts = await _forecastService.GetForecastAsync(DateTime.Now);
-            _logger.Here(l => l.LogInformation("CorrelationId for a request instance can be obtained with HttpContextAccessor: {@correlationId}", _contextAccessor.GetCorrelationId()));
+            _logger.Here(l => l.LogInformation("CorrelationId for a request instance can be obtained with HttpContextAccessor: {@0}", _contextAccessor.GetCorrelationId()));
 
             _logger.Here(l => l.Exiting(forecasts));
             return forecasts;

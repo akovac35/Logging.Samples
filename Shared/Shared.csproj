@@ -6,7 +6,7 @@
   
   <ItemGroup>
 	
-	<PackageReference Include="com.github.akovac35.Logging" Version="1.0.5" />
+	<PackageReference Include="com.github.akovac35.Logging" Version="1.0.7" />
 	
 	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.2" />

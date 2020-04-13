@@ -25,7 +25,7 @@
         logger.Here(l => l.Entering());
 
         currentCount++;
-        logger.Here(l => l.LogInformation("currentCount: {currentCount}", currentCount));
+        logger.Here(l => l.LogInformation("currentCount: {0}", currentCount));
 
         // Business logic call sample
         var blMock = new BusinessLogicMock<object>();

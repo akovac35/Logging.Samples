@@ -1,4 +1,8 @@
-// Author: Aleksander Kovač
+// License:
+// Apache License Version 2.0, January 2004
+
+// Authors:
+//   Aleksander Kovač
 
 using com.github.akovac35.Logging.AspNetCore;
 using com.github.akovac35.Logging.AspNetCore.Correlation;

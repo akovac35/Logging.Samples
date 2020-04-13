@@ -1,4 +1,8 @@
-﻿// Author: Aleksander Kovač
+﻿// License:
+// Apache License Version 2.0, January 2004
+
+// Authors:
+//   Aleksander Kovač
 
 using com.github.akovac35.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -69,7 +73,7 @@ namespace Shared.Blogs
         {
             _logger.Here(l => l.Entering());
 
-            _logger.Here(l => l.LogDebug("{@disposedValue}", disposedValue));
+            _logger.Here(l => l.LogDebug("{@0}", disposedValue));
 
             if (!disposedValue)
             {

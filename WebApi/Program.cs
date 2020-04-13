@@ -1,4 +1,8 @@
-// Author: Aleksander Kovač
+// License:
+// Apache License Version 2.0, January 2004
+
+// Authors:
+//   Aleksander Kovač
 
 using com.github.akovac35.Logging;
 using com.github.akovac35.Logging.NLog;
@@ -34,6 +38,15 @@ namespace WebApi
             try
             {
                 CreateHostBuilder(args).Build().Run();
+
+                // Previous logger factory (created in host builder) is now disposed ...
+                SamplesLoggingHelper.LoggerConfig(configActionNLog: () =>
+                {
+                    LoggerFactoryProvider.LoggerFactory = NLogHelper.CreateLoggerFactory();
+                }, configActionSerilog: () =>
+                {
+                    LoggerFactoryProvider.LoggerFactory = SerilogHelper.CreateLoggerFactory();
+                });
 
                 Here(l => l.Exiting());
             }
