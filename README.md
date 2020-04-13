@@ -1,5 +1,5 @@
 # Logging.Samples
-This project contains samples for .NET Core and ASP.NET Core logging using various logger frameworks for the ```Microsoft.Extensions.Logging.ILogger``` interface.
+This project contains samples for .NET Core and ASP.NET Core logging using various logger frameworks and the ```Microsoft.Extensions.Logging.ILogger``` interface.
 
 Also demonstrated is functionality provided in the [Logging](https://github.com/akovac35/Logging) library. **You should get familiar with it first to understand the samples**. The library implementation itself is also a good example on how to use various logger frameworks.
 
