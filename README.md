@@ -1,5 +1,5 @@
 # Logging.Samples
-This project contains samples for .NET Core and ASP.NET Core logging using various logger frameworks.
+This project contains samples for .NET Core and ASP.NET Core logging using various logger frameworks for the ```Microsoft.Extensions.Logging.ILogger``` interface.
 
 Also demonstrated is functionality provided in the [Logging](https://github.com/akovac35/Logging) library. **You should get familiar with it first to understand the samples**. The library implementation itself is also a good example on how to use various logger frameworks.
 
@@ -10,7 +10,14 @@ Navigate to ../ConsoleApp, ../WebApi or ../WebApp and execute ```dotnet run seri
 
 ## Contents
 
-Logging best practices are demonstrated for tests (TestApp), console (ConsoleApp), ASP.NET Core Controller (WebApi), ASP.NET Core Blazor Server and Entity Framework Core (WebApp) applications while also demonstrating how to solve the log entry correlation problem with the help of the [Logging](https://github.com/akovac35/Logging) library. In addition, the use of compile-time logger invocation context is demonstrated, transparently providing method name and source code line number to the logger framework without the use of reflection.
+Logging best practices are demonstrated for the ```Microsoft.Extensions.Logging.ILogger``` interface in:
+
+* test (TestApp),
+* console (ConsoleApp), 
+* ASP.NET Core Controller (WebApi),
+* ASP.NET Core Blazor Server and Entity Framework Core (WebApp)
+ 
+applications while also demonstrating how to solve the log entry correlation problem with the help of the [Logging](https://github.com/akovac35/Logging) library. In addition, the use of compile-time logger invocation context is demonstrated, transparently providing method name and source code line number to the logger framework without the use of reflection.
 
 All samples are configured to demonstrate the configuration of common logging requirements for every sampled logger framework implementation:
 
