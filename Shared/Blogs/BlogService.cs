@@ -81,8 +81,8 @@ namespace Shared.Blogs
 
                 // We should explicitely manage our explicitly provided connection
                 Context?.Database.CloseConnection();
-                Context?.Database.GetDbConnection()?.Dispose();
                 Context?.Dispose();
+                Context = null;
             }
 
             _logger.Here(l => l.Exiting());

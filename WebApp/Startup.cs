@@ -48,58 +48,7 @@ namespace WebApp
                 return tmp;
             });
 
-            /* Assumptions are invalid because of DI bug: https://github.com/dotnet/extensions/issues/1785
-
-
-
-// Blazor "scoped" is for the duration of a user circuit (similar to session). For this sample we will use a connection per application view,
-// so transient scope is required
-services.AddTransient<SqliteConnection>(fact =>
-{
-    Here(l => l.Entering());
-
-    var tmp = new SqliteConnection("DataSource=:memory:");
-
-    Here(l => l.ExitingSimpleFormat(tmp));
-    return tmp;
-});
-// Same argument as for SqliteConnection
-services.AddTransient<BlogContext>(fact =>
-{
-    Here(l => l.Entering());
-
-    // This connection is explicitly provided so we have to manage it explicitly by
-    // opening, closing and disposing it
-    var connection = fact.GetService<SqliteConnection>();
-
-    // Provided by logger frameworks as a singleton
-    var loggerFactory = fact.GetService<ILoggerFactory>();
-    var options = new DbContextOptionsBuilder<BlogContext>()
-    .UseSqlite(connection)
-    .UseLoggerFactory(loggerFactory)
-    .Options;
-    var context = new BlogContext(options);
-
-    Here(l => l.ExitingSimpleFormat(context));
-    return context;
-});
-// Same argument as for SqliteConnection
-services.AddTransient<BlogService>(fact =>
-{
-    Here(l => l.Entering());
-
-    var context = fact.GetService<BlogContext>();
-    var blogService = new BlogService(context);
-
-    // In-memory database exists only for the duration of an open connection
-    context.Database.OpenConnection();
-    context.Database.EnsureCreated();
-
-    Here(l => l.ExitingSimpleFormat(blogService));
-    return blogService;
-});
-*/
-
+            // Keep in mind this DI bug: https://github.com/dotnet/extensions/issues/1785
             services.AddScoped<BlogServiceFactory>();
 
             services.AddRazorPages();
