@@ -7,10 +7,8 @@
         "Microsoft": "Information"
       }
     },
-    "Using": [ "com.github.akovac35.Logging.Serilog.AspNetCore" ],
     "Enrich": [
-      "WithThreadId",
-      "WithCorrelationId"
+      "WithThreadId"
     ],
 	"Destructure": [
       { "Name": "ToMaximumDepth", "Args": { "maximumDestructuringDepth": 5 } },

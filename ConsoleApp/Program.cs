@@ -43,7 +43,7 @@ namespace ConsoleApp
                     List<Task<int>> tasks = new List<Task<int>>();
                     for (int i = 0; i < 10; i++)
                     {
-                        tasks.Add(BusinessLogicMock<object>.GetTaskInstance());
+                        tasks.Add(BusinessLogicMock<object>.GetTaskInstance(LoggerFactoryProvider.LoggerFactory));
                     }
 
                     // Business logic call sample

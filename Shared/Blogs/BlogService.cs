@@ -7,6 +7,7 @@
 using com.github.akovac35.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,13 @@ namespace Shared.Blogs
 {
     public class BlogService : IDisposable
     {
-        public BlogService(BlogContext context, ILoggerFactory loggerFactory = null)
+        public BlogService(BlogContext context, ILogger<BlogService> logger = null)
         {
-            _logger = (loggerFactory ?? LoggerFactoryProvider.LoggerFactory).CreateLogger<BlogService>();
-
-            _logger.Here(l => l.EnteringSimpleFormat(context));
-
+            if (logger != null) _logger = logger;
             Context = context;
-
-            _logger.Here(l => l.Exiting());
         }
 
-        private ILogger _logger;
+        private ILogger _logger = NullLogger.Instance;
 
         public BlogContext Context { get; set; }
 
@@ -73,7 +69,7 @@ namespace Shared.Blogs
         {
             _logger.Here(l => l.Entering());
 
-            _logger.Here(l => l.LogDebug("{@0}", disposedValue));
+            _logger.Here(l => l.LogDebug("disposedValue: {@0}", disposedValue));
 
             if (!disposedValue)
             {

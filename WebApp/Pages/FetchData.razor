@@ -1,18 +1,16 @@
 ﻿@page "/fetchdata"
 
 @using Microsoft.Extensions.Logging
-@using Microsoft.AspNetCore.Http
-@using global::com.github.akovac35.Logging.AspNetCore
-@using global::com.github.akovac35.Logging
+@using com.github.akovac35.Logging
+@using com.github.akovac35.Logging.Correlation
 @using global::Shared.Services
 
-@inject IHttpContextAccessor hc
-@inject ILogger<WebApp.Pages.FetchData> logger
 @inject WeatherForecastService ForecastService
+@inject ILogger<WebApp.Pages.FetchData> logger
 
 <h1>Weather forecast</h1>
 
-<p>Correlation id:  @hc.GetCorrelationId()</p>
+<p>Correlation id:  @CorrelationProvider.CurrentCorrelationProvider?.GetCorrelationId()</p>
 
 <p>This component demonstrates fetching data from a service.</p>
 
@@ -46,15 +44,15 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    protected WeatherForecast[] forecasts;
 
     protected override async Task OnInitializedAsync()
     {
         logger.Here(l => l.Entering());
 
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-		// Wrapping with object[] is required to log all array elements and not just the first one
-        logger.Here(l => l.LogInformation("forecasts: {@0}", new object[] {forecasts}));
+        // Wrapping with object[] is required to log all array elements and not just the first one
+        logger.Here(l => l.LogInformation("forecasts: {@0}", new object[] { forecasts }));
 
         logger.Here(l => l.Exiting());
     }

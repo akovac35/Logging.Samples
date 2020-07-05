@@ -7,6 +7,7 @@
 using com.github.akovac35.Logging;
 using com.github.akovac35.Logging.NLog;
 using com.github.akovac35.Logging.Serilog;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -38,15 +39,6 @@ namespace WebApp
             try
             {
                 CreateHostBuilder(args).Build().Run();
-
-                // Previous logger factory (created in host builder) is now disposed ...
-                SamplesLoggingHelper.LoggerConfig(configActionNLog: () =>
-                {
-                    LoggerFactoryProvider.LoggerFactory = NLogHelper.CreateLoggerFactory();
-                }, configActionSerilog: () =>
-                {
-                    LoggerFactoryProvider.LoggerFactory = SerilogHelper.CreateLoggerFactory();
-                });
 
                 Here(l => l.Exiting());
             }
@@ -82,7 +74,11 @@ namespace WebApp
                         }).UseNLog();
                     }, configActionSerilog: () =>
                     {
-                        webBuilder.UseSerilog();
+                        webBuilder.ConfigureLogging(logging =>
+                        {
+                            // Needed to remove duplicate log entries
+                            logging.ClearProviders();
+                        }).UseSerilog();
                     });
                 });
     }

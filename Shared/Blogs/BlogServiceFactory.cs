@@ -7,31 +7,34 @@
 using com.github.akovac35.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 
 namespace Shared.Blogs
 {
     public class BlogServiceFactory
     {
-        public BlogServiceFactory(ILoggerFactory loggerFactory = null)
+        public BlogServiceFactory(ILogger<BlogServiceFactory> logger = null)
         {
-            _logger = (loggerFactory ?? LoggerFactoryProvider.LoggerFactory).CreateLogger<BlogServiceFactory>();
+            if (logger != null) _logger = logger;
         }
 
-        private ILogger _logger;
+        private ILogger _logger = NullLogger.Instance;
 
         public BlogService CreateInstance(Action<DbContextOptionsBuilder<BlogContext>> configureContext, ILoggerFactory loggerFactory = null)
         {
             _logger.Here(l => l.EnteringSimpleFormat(configureContext, loggerFactory));
 
+            var lf = loggerFactory ?? NullLoggerFactory.Instance;
+
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<BlogContext>();
-            dbContextOptionsBuilder.UseLoggerFactory(loggerFactory);
+            dbContextOptionsBuilder.UseLoggerFactory(lf);
             // Should provide connection, e.g. dbContextOptionsBuilder.UseSqlite(connection)
             configureContext(dbContextOptionsBuilder);
 
             var options = dbContextOptionsBuilder.Options;
             var context = new BlogContext(options);
-            var blogService = new BlogService(context);
+            var blogService = new BlogService(context, lf.CreateLogger<BlogService>());
 
             // In-memory database exists only for the duration of an open connection
             context.Database.OpenConnection();

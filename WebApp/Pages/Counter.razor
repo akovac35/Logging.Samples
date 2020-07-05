@@ -1,17 +1,15 @@
 ﻿@page "/counter"
 
 @using Microsoft.Extensions.Logging
-@using Microsoft.AspNetCore.Http
-@using global::com.github.akovac35.Logging.AspNetCore
-@using global::com.github.akovac35.Logging
+@using com.github.akovac35.Logging
+@using com.github.akovac35.Logging.Correlation
 @using global::Shared.Mocks
 
-@inject IHttpContextAccessor hc
 @inject ILogger<WebApp.Pages.Counter> logger
 
 <h1>Counter</h1>
 
-<p>Correlation id:  @hc.GetCorrelationId()</p>
+<p>Correlation id:  @CorrelationProvider.CurrentCorrelationProvider?.GetCorrelationId()</p>
 
 <p>Current count: @currentCount</p>
 

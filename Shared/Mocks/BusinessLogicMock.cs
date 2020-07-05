@@ -6,6 +6,7 @@
 
 using com.github.akovac35.Logging;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Threading.Tasks;
 
@@ -13,20 +14,16 @@ namespace Shared.Mocks
 {
     public class BusinessLogicMock<T>
     {
-        public BusinessLogicMock(ILoggerFactory loggerFactory = null)
+        public BusinessLogicMock(ILogger<BusinessLogicMock<T>> logger = null)
         {
-            _logger = (loggerFactory ?? LoggerFactoryProvider.LoggerFactory).CreateLogger<BusinessLogicMock<T>>();
-
-            _logger.Here(l => l.Entering());
-
-            _logger.Here(l => l.Exiting());
+            if (logger != null) _logger = logger;
         }
 
-        private ILogger _logger;
+        private ILogger _logger = NullLogger.Instance;
 
-        public static Task<int> GetTaskInstance()
+        public static Task<int> GetTaskInstance(ILoggerFactory loggerFactory)
         {
-            var tmp = new BusinessLogicMock<T>();
+            var tmp = new BusinessLogicMock<T>(loggerFactory.CreateLogger<BusinessLogicMock<T>>());
             return tmp.FirstLevelAsync((new Random()).Next(0, 3000));
         }
 

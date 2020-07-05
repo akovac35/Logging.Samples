@@ -39,15 +39,6 @@ namespace WebApi
             {
                 CreateHostBuilder(args).Build().Run();
 
-                // Previous logger factory (created in host builder) is now disposed ...
-                SamplesLoggingHelper.LoggerConfig(configActionNLog: () =>
-                {
-                    LoggerFactoryProvider.LoggerFactory = NLogHelper.CreateLoggerFactory();
-                }, configActionSerilog: () =>
-                {
-                    LoggerFactoryProvider.LoggerFactory = SerilogHelper.CreateLoggerFactory();
-                });
-
                 Here(l => l.Exiting());
             }
             catch (Exception ex)
@@ -82,7 +73,11 @@ namespace WebApi
                         }).UseNLog();
                     }, configActionSerilog: () =>
                     {
-                        webBuilder.UseSerilog();
+                        webBuilder.ConfigureLogging(logging =>
+                        {
+                            // Needed to remove duplicate log entries
+                            logging.ClearProviders();
+                        }).UseSerilog();
                     });
                 });
     }

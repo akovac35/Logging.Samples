@@ -1,11 +1,11 @@
 ﻿@inherits BlogsBase
 @page "/blogs"
 
-@using global::com.github.akovac35.Logging.AspNetCore
+@using com.github.akovac35.Logging.Correlation 
 
 <h1>Blogs</h1>
 
-<p>Correlation id:  @hc.GetCorrelationId()</p>
+<p>Correlation id:  @CorrelationProvider.CurrentCorrelationProvider?.GetCorrelationId()</p>
 
 <p>Current count: @blogService.Count</p>
 

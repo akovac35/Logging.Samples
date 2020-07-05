@@ -7,6 +7,7 @@
 using com.github.akovac35.Logging;
 using com.github.akovac35.Logging.Correlation;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,21 +16,12 @@ namespace Shared.Services
 {
     public class WeatherForecastService
     {
-        public WeatherForecastService(ICorrelationProvider correlationProvider, ILoggerFactory loggerFactory = null)
+        public WeatherForecastService(ILogger<WeatherForecastService> logger = null)
         {
-            _logger = (loggerFactory ?? LoggerFactoryProvider.LoggerFactory).CreateLogger<WeatherForecastService>();
-
-            _logger.Here(l => l.Entering(correlationProvider));
-
-            if (correlationProvider == null) throw new ArgumentNullException(nameof(correlationProvider));
-            _correlationProvider = correlationProvider;
-
-            _logger.Here(l => l.Exiting());
+            if (logger != null) _logger = logger;
         }
 
-        private ILogger _logger;
-
-        protected ICorrelationProvider _correlationProvider;
+        private ILogger _logger = NullLogger.Instance;
 
         private static readonly string[] Summaries = new[]
         {
@@ -40,7 +32,7 @@ namespace Shared.Services
         {
             _logger.Here(l => l.Entering(startDate));
 
-            _logger.Here(l => l.LogInformation("CorrelationId is useful for correlating log contents with service or web page requests: {@0}", _correlationProvider.GetCorrelationId()));
+            _logger.Here(l => l.LogInformation("CorrelationId is useful for correlating log contents with service or web page requests: {@0}", CorrelationProvider.CurrentCorrelationProvider?.GetCorrelationId() ));
 
             var rng = new Random();
             var tmp = Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast

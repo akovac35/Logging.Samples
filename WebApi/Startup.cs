@@ -4,16 +4,12 @@
 // Authors:
 //   Aleksander Kovač
 
-using com.github.akovac35.Logging.AspNetCore;
 using com.github.akovac35.Logging.AspNetCore.Correlation;
-using com.github.akovac35.Logging.Correlation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Shared;
 using Shared.Services;
@@ -32,41 +28,37 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpContextAccessor();
-            services.AddScoped<ICorrelationProvider, CorrelationProvider>();
-            services.AddScoped<WeatherForecastService>(fact =>
+            SamplesLoggingHelper.LoggerConfig(configActionNLog: () =>
             {
-                ICorrelationProvider correlationProvider = (new HttpContextAccessor()).GetCorrelationProvider();
-                return new WeatherForecastService(correlationProvider);
+                services.AddLoggingCorrelation(obtainCorrelationIdFromRequestHeaders: true);
+            }, configActionSerilog: () =>
+            {
+                services.AddLoggingCorrelation(obtainCorrelationIdFromRequestHeaders: true);
             });
+            services.AddScoped<WeatherForecastService>();
+
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            SamplesLoggingHelper.LoggerConfig(configActionNLog: () =>
-            {
-                // Update the LoggerFactoryProvider once logging config is fully complete
-                com.github.akovac35.Logging.LoggerFactoryProvider.LoggerFactory = loggerFactory;
-            }, configActionSerilog: () =>
-            {
-                app.UseSerilogRequestLogging();
-                // Update the LoggerFactoryProvider once logging config is fully complete
-                com.github.akovac35.Logging.LoggerFactoryProvider.LoggerFactory = loggerFactory;
-            });
-
-            app.UseMiddleware<CorrelationIdMiddleware>();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            SamplesLoggingHelper.LoggerConfig(configActionNLog: () =>
+            {
+                app.UseLoggingCorrelation();
+            }, configActionSerilog: () =>
+            {
+                app.UseLoggingCorrelation();
+                app.UseSerilogRequestLogging();
+            });
+
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

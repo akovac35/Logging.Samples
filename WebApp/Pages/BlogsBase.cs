@@ -7,7 +7,6 @@
 using com.github.akovac35.Logging;
 using global::Shared.Blogs;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,15 +15,13 @@ namespace WebApp.Pages
 {
     public class BlogsBase : ComponentBase, IDisposable
     {
-        [Inject] public IHttpContextAccessor hc { get; set; }
-
         public BlogService blogService { get; set; }
 
         [Inject] public BlogServiceFactory blogServiceFactory { get; set; }
 
         [Inject] public ILoggerFactory loggerFactory { get; set; }
 
-        [Inject] public ILogger<WebApp.Pages.BlogsBase> logger { get; set; }
+        [Inject] public ILogger<BlogsBase> logger { get; set; }
 
         protected override void OnInitialized()
         {
