@@ -6,10 +6,11 @@
 @using global::Shared.Mocks
 
 @inject ILogger<WebApp.Pages.Counter> logger
+@inject CorrelationProviderAccessor CorrelationProviderAccessorInstance
 
 <h1>Counter</h1>
 
-<p>Correlation id:  @CorrelationProvider.CurrentCorrelationProvider?.GetCorrelationId()</p>
+<p>Correlation id:  @CorrelationProviderAccessorInstance.Current?.GetCorrelationId()</p>
 
 <p>Current count: @currentCount</p>
 

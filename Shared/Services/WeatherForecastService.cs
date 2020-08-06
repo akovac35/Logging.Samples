@@ -16,12 +16,15 @@ namespace Shared.Services
 {
     public class WeatherForecastService
     {
-        public WeatherForecastService(ILogger<WeatherForecastService> logger = null)
+        public WeatherForecastService(CorrelationProviderAccessor correlationProviderAccessor, ILogger<WeatherForecastService> logger = null)
         {
             if (logger != null) _logger = logger;
+            CorrelationProviderAccessorInstance = correlationProviderAccessor ?? throw new ArgumentNullException(nameof(correlationProviderAccessor));
         }
 
         private ILogger _logger = NullLogger.Instance;
+
+        protected CorrelationProviderAccessor CorrelationProviderAccessorInstance { get; set; }
 
         private static readonly string[] Summaries = new[]
         {
@@ -32,7 +35,7 @@ namespace Shared.Services
         {
             _logger.Here(l => l.Entering(startDate));
 
-            _logger.Here(l => l.LogInformation("CorrelationId is useful for correlating log contents with service or web page requests: {@0}", CorrelationProvider.CurrentCorrelationProvider?.GetCorrelationId() ));
+            _logger.Here(l => l.LogInformation("CorrelationId is useful for correlating log contents with service or web page requests: {@0}", CorrelationProviderAccessorInstance.Current?.GetCorrelationId()));
 
             var rng = new Random();
             var tmp = Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast

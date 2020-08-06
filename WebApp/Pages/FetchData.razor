@@ -7,10 +7,11 @@
 
 @inject WeatherForecastService ForecastService
 @inject ILogger<WebApp.Pages.FetchData> logger
+@inject CorrelationProviderAccessor CorrelationProviderAccessorInstance
 
 <h1>Weather forecast</h1>
 
-<p>Correlation id:  @CorrelationProvider.CurrentCorrelationProvider?.GetCorrelationId()</p>
+<p>Correlation id:  @CorrelationProviderAccessorInstance.Current?.GetCorrelationId()</p>
 
 <p>This component demonstrates fetching data from a service.</p>
 
