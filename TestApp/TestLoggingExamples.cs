@@ -27,10 +27,10 @@ namespace TestApp
             };
 
             serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(typeof(BusinessLogicMock<>));
-
-            // Register TestLogger using extension method
+            // Register TestLogger using extension method (uses TryAdd),
+            // always register it as the first service for reliable registration
             serviceCollection.AddTestLogger(onWrite: customOnWrite, onBeginScope: customOnBeginScope);
+            serviceCollection.AddTransient(typeof(BusinessLogicMock<>));
         }
 
         [SetUp]
