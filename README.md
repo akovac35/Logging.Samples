@@ -6,7 +6,9 @@ Also demonstrated is functionality provided in the [Logging](https://github.com/
 ![this](Resources/.NET_Core_Logo_small.png)
 
 ## Executing code
-Navigate to ../ConsoleApp, ../WebApi or ../WebApp and execute ```dotnet run serilog``` or ```dotnet run nlog```. Execute ```dotnet test``` for the TestApp. 
+Navigate to ../ConsoleApp, ../WebApi or ../WebApp and execute ```dotnet run serilog``` or ```dotnet run nlog```. Execute ```dotnet test``` for the TestApp.
+
+As per configuration and depending on the logger used, logs files will be stored in the project root (WebApp, WebApi, ...) or in bin's subfolder - search for the updated `Logs` folder.
 
 ## Contents
 
