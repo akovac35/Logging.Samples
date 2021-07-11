@@ -44,7 +44,7 @@ namespace WebApi
             catch (Exception ex)
             {
                 Here(l => l.LogError(ex, ex.Message));
-                throw ex;
+                throw;
             }
             finally
             {

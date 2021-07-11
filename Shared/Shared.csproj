@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   
   <ItemGroup>
 	
-	<PackageReference Include="com.github.akovac35.Logging" Version="1.1.2" />
+	<PackageReference Include="com.github.akovac35.Logging" Version="1.2.0" />
 	
-	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.7" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.7" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
